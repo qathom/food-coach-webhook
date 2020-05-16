@@ -1,0 +1,28 @@
+service: food-coach-webhook
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: eu-west-3
+
+functions:
+  app:
+    handler: dist/src/server.handler
+    environment:
+      NODE_ENV: production
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+include:
+  - dist/**/*
+  - static/**.json
+  - static/**.html
+  - tmp/
+exclude:
+  - bin/**/*
+  - env.example
+  - '*.postman_collection.json'
+
+plugins:
+  - serverless-offline

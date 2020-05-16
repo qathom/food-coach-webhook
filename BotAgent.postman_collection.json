@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "867c7744-432e-4d77-8130-ad737d904bff",
+		"name": "BotAgent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Webhook",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"responseId\": \"a5c0288a-852c-4c66-8243-2e6438f0e410-xxxxxxxx\",\r\n  \"queryResult\": {\r\n    \"queryText\": \"chocolat\",\r\n    \"parameters\": {},\r\n    \"allRequiredParamsPresent\": true,\r\n    \"intent\": {\r\n      \"name\": \"projects/proejctId/agent/intents/e68a53a4-f0fa-473c-a802-xxxxxxxxxxxx\",\r\n      \"displayName\": \"Search\"\r\n    },\r\n    \"intentDetectionConfidence\": 1,\r\n    \"diagnosticInfo\": {\r\n      \"webhook_latency_ms\": 1232\r\n    },\r\n    \"languageCode\": \"fr\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
