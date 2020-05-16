@@ -1,4 +1,4 @@
-# useinf-chatbot-webhook
+# food-coach-webhook
 
 ## Installation
 
