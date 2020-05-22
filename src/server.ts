@@ -4,9 +4,9 @@ import express from 'express';
 import basicAuth from 'express-basic-auth';
 import serverless from 'serverless-http';
 import { useExpressServer } from 'routing-controllers';
-import { WebhookController } from './WebhookController';
-import { CacheController } from './CacheController';
-import { IndexController } from './IndexController';
+import { WebhookController } from './controllers/WebhookController';
+import { CacheController } from './controllers/CacheController';
+import { IndexController } from './controllers/IndexController';
 import * as path from 'path';
 
 require('dotenv').config();
