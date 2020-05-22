@@ -33,17 +33,39 @@ export class CacheConversation {
 
     if (index === -1) {
       conversations.push({
-        createdAt: new Date().toISOString(),
+        // Default
+        ...{
+          createdAt: new Date().toISOString(),
+          target: null,
+          items: [],
+        },
         ...conversation,
       });
     } else {
+      // Update items
       conversations[index].items = [
         ...conversations[index].items,
-        ...conversation.items,
+        ...conversation.items || [],
       ];
+
+      // Update target
+      if (conversation.target) {
+        conversations[index].target = conversation.target;
+      }
     }
 
     fs.writeFileSync(this.storePath, JSON.stringify(conversations));
+  }
+
+  remove(session: string) {
+    const list = this.read();
+    const index = list.findIndex(item => item[this.uniqueKey] === session);
+
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+
+    fs.writeFileSync(this.storePath, JSON.stringify(list));
   }
 
   reset() {
