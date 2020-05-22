@@ -2,7 +2,8 @@ import { FoodMapper } from "../src/FoodMapper";
 
 export type Conversation = {
   session: string,
-  items: number[],
+  target?: number,
+  items?: number[],
   createdAt?: string,
 };
 
@@ -65,6 +66,12 @@ export interface Reader<Entity> {
   read: (sheetIndex: number, filename: string) => Entity[],
 }
 
+export type I18n = {
+  [key: string]: {
+    [key: string]: string,
+  },
+};
+
 export type SearchResult<Entity> = {
   score: number,
   item: Entity,
@@ -88,9 +95,11 @@ export type WebhookRequestOutputContext = {
 }
 
 export type WebhookFulfillmentTextMessage = {
-  text: {
-    text: string[],
-  },
+  text: string[],
+};
+
+export type FullfillmentMessage = {
+  text?: WebhookFulfillmentTextMessage,
 };
 
 export type WebhookRequest = {
@@ -103,7 +112,6 @@ export type WebhookRequest = {
     },
     allRequiredParamsPresent: boolean,
     fulfillmentText: string,
-    fulfillmentMessages: WebhookFulfillmentTextMessage[],
     outputContexts: WebhookRequestOutputContext[],
     intent: {
       name: string,
@@ -133,18 +141,8 @@ export type WebhookEventResponse = {
   },
 };
 
-export type WebhookSuggestion = {
-  suggestions: {
-    title: string,
-  },
-};
-
-export type WebhookFulfillmentRichResponse = {
-  suggestions: WebhookSuggestion[],
-};
-
 export type WebhookResponse = {
-  fulfillmentMessages?: WebhookFulfillmentTextMessage[],
+  fulfillmentMessages?: FullfillmentMessage[],
   sessionEntityTypes?: WebhookSessionEntityTypes[],
   followupEventInput?: WebhookEventResponse
 };
