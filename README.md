@@ -39,7 +39,7 @@ A basic example of Postman configuration file is available in this repository.
 
 This repository already contains the Swiss food composition datasets in `static/food-composition` - v6.1 in the available 4 languages.
 Please follow the steps to import newer Excel datasets:
-- Download datasets - [website](https://www.valeursnutritives.ch/en/downloads/)
+- Download datasets from [valeursnutritives.ch](https://www.valeursnutritives.ch/en/downloads/)
 - Copy and paste the files in `static/food-composition`
 - Run `npm run import:data` to generate the data as JSON flat files
 
