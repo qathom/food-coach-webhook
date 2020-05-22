@@ -9,6 +9,8 @@ import { CacheController } from './controllers/CacheController';
 import { IndexController } from './controllers/IndexController';
 import * as path from 'path';
 
+const mustacheExpress = require('mustache-express');
+
 require('dotenv').config();
 
 const app = express();
@@ -17,8 +19,9 @@ const port = 3000;
 const router = express.Router();
 
 // Render engine
-app.set('views', path.join(__dirname, process.env.NODE_ENV === 'production' ? '../..' : '..', '/static/html'))
-app.engine('html', require('ejs').renderFile);
+app.engine('html', mustacheExpress());
+app.set('view engine', 'mustache')
+app.set('views', path.join(__dirname, process.env.NODE_ENV === 'production' ? '../..' : '..', '/static/templates'))
 
 app.use(express.static(path.join(__dirname, 'static')));
 
