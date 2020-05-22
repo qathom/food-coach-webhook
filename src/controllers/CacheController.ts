@@ -1,5 +1,5 @@
 import { JsonController, Post } from 'routing-controllers';
-import { CacheConversation } from './CacheConversation';
+import { CacheConversation } from '../CacheConversation';
 
 @JsonController()
 export class CacheController {

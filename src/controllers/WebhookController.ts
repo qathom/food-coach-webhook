@@ -1,18 +1,22 @@
-import { WebhookRequest, WebhookResponse, WebhookHandler } from '../types';
-import { FoodMapper } from './FoodMapper';
+import { WebhookRequest, WebhookResponse, WebhookHandler } from '../../types';
+import { FoodMapper } from '../FoodMapper';
 import { JsonController, Post, Body } from 'routing-controllers';
-import { WebhookSearchResponse } from './WebhookSearchResponse';
-import { WebhookSelectionResponse } from './WebhookSelectionResponse';
-import { WebhookAddItemResponse } from './WebhookAddItem';
-import { WebhookItemCaloryResponse } from './WebhookItemCalory';
+import { WebhookSearchResponse } from '../responders/WebhookSearchResponse';
+import { WebhookCalculateResponse } from '../responders/WebhookCalculateResponse';
+import { WebhookAddItemResponse } from '../responders/WebhookAddItem';
+import { WebhookItemCaloryResponse } from '../responders/WebhookItemCalory';
+import { WebhookSetTargetResponse } from '../responders/WebhookSetTarget';
+import { WebhookResetResponse } from '../responders/WebhookReset';
 
 @JsonController('/hooks')
 export class WebhookController {
   private readonly handlers: WebhookHandler[] = [
     { intentName: 'Search', responder: new WebhookSearchResponse() },
     { intentName: 'AddItem', responder: new WebhookAddItemResponse() },
-    { intentName: 'Selection', responder: new WebhookSelectionResponse() },
+    { intentName: 'Calculate', responder: new WebhookCalculateResponse() },
     { intentName: 'HowManyCalories', responder: new WebhookItemCaloryResponse() },
+    { intentName: 'SetTarget', responder: new WebhookSetTargetResponse() },
+    { intentName: 'AskReset', responder: new WebhookResetResponse() },
   ];
 
   private dispatchResponder(webhookRequest: WebhookRequest, foodMapper: FoodMapper) {
