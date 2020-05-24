@@ -33,11 +33,6 @@ npm run deploy
 npm run export:data
 ```
 
-## Dialogflow Webhook compatibility
-
-Please make sure to pass a well formated webhook request to test the app.
-A basic example of Postman configuration file is available in this repository.
-
 ## Data import
 
 This repository already contains the Swiss food composition datasets in `static/food-composition` - v6.1 in the available 4 languages.
