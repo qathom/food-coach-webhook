@@ -45,3 +45,6 @@ yarn.lock
 
 # Env
 .env
+
+# Exported data
+static/export/**/*
