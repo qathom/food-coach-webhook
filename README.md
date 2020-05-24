@@ -28,6 +28,9 @@ npm run start:prod
 
 # Deployment (with serverless)
 npm run deploy
+
+# Export data (entity integration in Dialogflow)
+npm run export:data
 ```
 
 ## Dialogflow Webhook compatibility
