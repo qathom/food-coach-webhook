@@ -3,7 +3,7 @@ import { FoodMapper } from '../FoodMapper';
 
 export abstract class WebhookBaseResponder implements WebhookResponder {
   protected readonly i18n: I18n;
-  private activeLanguage: string = 'en';
+  private activeLanguage = 'en';
   private webhookResponse: WebhookResponse;
 
   /**
@@ -24,6 +24,7 @@ export abstract class WebhookBaseResponder implements WebhookResponder {
    * @param foodMapper
    */
   // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handle(webhookRequest: WebhookRequest, foodMapper: FoodMapper): WebhookResponse {
     // Set active language
     this.activeLanguage = webhookRequest.queryResult.languageCode;
@@ -52,7 +53,7 @@ export abstract class WebhookBaseResponder implements WebhookResponder {
    * Adds a text response tet
    * @param text - the text to append in the response
    */
-  addTextResponse(text: string[]) {
+  addTextResponse(text: string[]): void {
     this.webhookResponse.fulfillmentMessages.push({
       text: {
         text,
@@ -65,7 +66,7 @@ export abstract class WebhookBaseResponder implements WebhookResponder {
    * @param text - the text to append in the response
    * @param values - the associated list of values to change in the key messages
    */
-  add18nTextResponse(text: string[], values?) {
+  add18nTextResponse(text: string[], values?): void {
     const i18nText = text.map((t, i) => this.translate(t, values ? values[i] : ''));
 
     this.webhookResponse.fulfillmentMessages.push({
