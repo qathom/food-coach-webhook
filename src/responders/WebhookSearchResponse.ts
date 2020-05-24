@@ -9,7 +9,7 @@ export class WebhookSearchResponse extends WebhookBaseResponder {
       wrongTarget: 'Please set your daily KCAL target by writing "Set target 2500 KCAL".' +
         'Women are likely to need between 1600 and 2400 calories.' +
         'Men from 2000 to 3000.',
-      foundItems: 'Found :value items.',
+      foundItems: 'Found :value items:',
       addItemInfo: 'Add an item by using its specific name "Add :value".'
     },
     fr: {
@@ -17,7 +17,7 @@ export class WebhookSearchResponse extends WebhookBaseResponder {
       wrongTarget: 'Veuillez définir votre objectif quotidien de KCAL en écrivant "Définir l\'objectif à 2500 KCAL".' +
         'Les femmes ont généralement besoin de 1600 à 2400 calories.' +
         'Les hommes de 2000 à 3000.',
-      foundItems: ':value résultats.',
+      foundItems: ':value résultats :',
       addItemInfo: 'Ajouter un élément en utilisant son nom "Ajouter :value".'
     },
   };
@@ -25,8 +25,8 @@ export class WebhookSearchResponse extends WebhookBaseResponder {
   handle(webhookRequest: WebhookRequest, foodMapper: FoodMapper): WebhookResponse {
     super.handle(webhookRequest, foodMapper);
 
-    const foodQuery = webhookRequest.queryResult.queryText;
-    const resQuery = foodMapper.search(foodQuery);
+    const meals: string[] = webhookRequest.queryResult.parameters?.meal as string[];
+    const resQuery = foodMapper.search(meals.join(' '));
 
     if (resQuery.length > 0) {
       this.add18nTextResponse(['foundItems'], [resQuery.length]);
@@ -34,9 +34,6 @@ export class WebhookSearchResponse extends WebhookBaseResponder {
   
     if (resQuery.length === 0) {
       this.add18nTextResponse(['noResult']);
-
-    } else {
-      this.add18nTextResponse(['addItemInfo'], [resQuery[0].item.name]);
     }
 
     const detailResponses: string[] = resQuery.map((r) => {
@@ -45,6 +42,10 @@ export class WebhookSearchResponse extends WebhookBaseResponder {
     });
 
     this.addTextResponse(detailResponses);
+
+    if (resQuery.length > 0) {
+      this.add18nTextResponse(['addItemInfo'], [resQuery[0].item.name]);
+    }
 
     return this.getResponse();
   }

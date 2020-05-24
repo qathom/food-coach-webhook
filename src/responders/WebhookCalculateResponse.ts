@@ -57,7 +57,7 @@ export class WebhookCalculateResponse extends WebhookBaseResponder {
 
     const detailResponses: string[] = list.map((foodItem, i) => {
       const kiloCaloryItem = foodItem.energy.find(e => e.unit === FoodUnit.KCAL);
-      return `#${i + 1}/${list.length} ${foodItem.name} | ${kiloCaloryItem.value} KCAL | ${foodItem.nutrients.map(nutrient => `${nutrient.type} = ${nutrient.value} ${nutrient.unit}}`)}`;
+      return `#${i + 1}/${list.length} ${foodItem.name} | ${kiloCaloryItem.value} KCAL | ${foodItem.nutrients.map(nutrient => `${nutrient.type} = ${nutrient.value} ${nutrient.unit}`)}`;
     });
 
     this.addTextResponse(detailResponses);

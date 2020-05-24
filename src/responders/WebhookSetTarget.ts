@@ -10,8 +10,8 @@ export class WebhookSetTargetResponse extends WebhookBaseResponder {
       targetError: 'Sorry. The target should be between :value KCAL.',
     },
     fr: {
-      targetUpdated: 'Votre objectif calorique est maintenant :value KCAL.',
-      targetError: 'Désolé. L\'objectif calorique doit être compris entre :value KCAL.',
+      targetUpdated: 'Votre objectif nutritionnel est maintenant :value KCAL.',
+      targetError: 'Désolé. L\'objectif nutritionnel doit être compris entre :value KCAL.',
 
     },
   };
@@ -28,6 +28,7 @@ export class WebhookSetTargetResponse extends WebhookBaseResponder {
 
     if (isNaN(kCalTarget) || kCalTarget < minTarget || kCalTarget > maxTarget) {
       this.add18nTextResponse(['targetError'], [`${minTarget}-${maxTarget}`]);
+      return this.getResponse();
     }
 
     cacheConversation.save({

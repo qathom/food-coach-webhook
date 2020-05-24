@@ -16,7 +16,7 @@ export class WebhookAddItemResponse extends WebhookBaseResponder {
       searchMore: 'You can also search for other items.',
     },
     fr: {
-      targetError: 'Veuillez fixer votre objectif quotidien de KCAL en écrivant "Définir l\'objectif à 2500 KCAL".' +
+      targetError: 'Veuillez fixer votre objectif quotidien de KCAL en écrivant "Définir mon objectif à 2500 KCAL".' +
         'Les femmes ont généralement besoin de 1600 à 2400 KCAL.' +
         'Les hommes de 2000 à 3000 KCAL.',
       noMatch: 'Repas manquant ! Essayez à nouveau d\'ajouter un article. Par exemple, "Ajouter une fondue au fromage".',
@@ -59,7 +59,7 @@ export class WebhookAddItemResponse extends WebhookBaseResponder {
     }
 
     const addItems = list.map((res) => res[0]);
-    const itemList: string = `${addItems.map(item => item.item.name).join(',')} | ${addItems.length}`;
+    const itemList = `${addItems.map(item => item.item.name).join(',')} | ${addItems.length}`;
 
     this.add18nTextResponse(['addedItems'], [itemList]);
 
