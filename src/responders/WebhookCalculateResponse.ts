@@ -1,4 +1,4 @@
-import { WebhookRequest, WebhookResponse, FoodUnit, I18n } from '../../types';
+import { WebhookRequest, WebhookResponse, FoodUnit, I18n, Nutrient } from '../../types';
 import { FoodMapper } from '../FoodMapper';
 import { CacheConversation } from '../CacheConversation';
 import { WebhookBaseResponder } from './WebhookBaseResponder';
@@ -11,6 +11,10 @@ export class WebhookCalculateResponse extends WebhookBaseResponder {
       exceededResult: 'Oh no! You exceeded :value KCAL.',
       dailyTarget: 'Your daily target is :value KCAL.',
       okResult: 'Well done! :value KCAL is below your daily target.',
+      FIBER: 'fiber',
+      PROTEIN: 'protein',
+      CARBOHYDRATE: 'carbohydrate',
+      SUGAR: 'sugar',
     },
     fr: {
       emptyList: 'Oups ! Vous avez une liste vide, demandez-moi de "chercher du chocolat" par exemple.',
@@ -18,6 +22,10 @@ export class WebhookCalculateResponse extends WebhookBaseResponder {
       exceededResult: 'Oh non ! Vous avez dépassé de :value KCAL.',
       dailyTarget: 'Votre objectif quotidien est :value KCAL.',
       okResult: 'Bravo ! :value KCAL est inférieure à votre objectif quotidien.',
+      FIBER: 'fibres',
+      PROTEIN: 'protéines',
+      CARBOHYDRATE: 'glucides',
+      SUGAR: 'sucre',
     },
   };
 
@@ -57,7 +65,9 @@ export class WebhookCalculateResponse extends WebhookBaseResponder {
 
     const detailResponses: string[] = list.map((foodItem, i) => {
       const kiloCaloryItem = foodItem.energy.find(e => e.unit === FoodUnit.KCAL);
-      return `#${i + 1}/${list.length} ${foodItem.name} | ${kiloCaloryItem.value} KCAL | ${foodItem.nutrients.map(nutrient => `${nutrient.type} = ${nutrient.value} ${nutrient.unit}`)}`;
+      const getNutrientUnit = (nutrient: Nutrient): string => nutrient.unit === FoodUnit.GRAM ? 'g' : FoodUnit.GRAM.toLowerCase();
+
+      return `#${i + 1}/${list.length} ${foodItem.name} | ${kiloCaloryItem.value} KCAL | ${foodItem.nutrients.map(nutrient => `${this.translate(nutrient.type)} = ${nutrient.value}${getNutrientUnit(nutrient)}`)}`;
     });
 
     this.addTextResponse(detailResponses);
