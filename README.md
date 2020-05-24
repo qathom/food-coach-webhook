@@ -41,6 +41,63 @@ Please follow the steps to import newer Excel datasets:
 - Copy and paste the files in `static/food-composition`
 - Run `npm run import:data` to generate the data as JSON flat files
 
+## Imported data structure
+
+Example:
+
+```json
+{
+  "createdAt": "2020-05-16T19:40:08.502Z",
+  "data": [
+    {
+      "id": 10536,
+      "name": "Agave syrup",
+      "tokens": [
+        "agave",
+        "syrup",
+        "sweets",
+        "sugar",
+        "and",
+        "sweeteners"
+      ],
+      "category": "Sweets/Sugar and sweeteners",
+      "nutrients": [
+        {
+          "type": "CARBOHYDRATE",
+          "value": 73.1,
+          "unit": "GRAM"
+        },
+        {
+          "type": "FIBER",
+          "value": 0,
+          "unit": "GRAM"
+        },
+        {
+          "type": "SUGAR",
+          "value": 0,
+          "unit": "GRAM"
+        },
+        {
+          "type": "PROTEIN",
+          "value": 0.2,
+          "unit": "GRAM"
+        }
+      ],
+      "energy": [
+        {
+          "value": 1240,
+          "unit": "KJ"
+        },
+        {
+          "value": 293,
+          "unit": "KCAL"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Note
 
 When importing datasets, the import script will add a list of tokens for each item.
