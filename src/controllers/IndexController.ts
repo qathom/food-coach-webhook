@@ -5,7 +5,7 @@ import * as path from 'path';
 export class IndexController {
   @Get('')
   @Render(path.join('index.html'))
-  index(@QueryParam('lang') inputLanguage: string) {
+  index(@QueryParam('lang') inputLanguage: string): object {
     const i18n = {
       en: {
         name: 'FoodCoach-bot is at your service',
