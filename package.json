@@ -39,6 +39,6 @@
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
     "serverless-http": "^2.7.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.17.0"
   }
 }
